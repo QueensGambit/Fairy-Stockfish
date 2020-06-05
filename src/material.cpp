@@ -112,6 +112,9 @@ namespace {
         bonus += pieceCount[Us][pt1] * v;
     }
 
+    if ((pos.pieces(Us, FERS) & DarkSquares) && (pos.pieces(Us, FERS) & ~DarkSquares))
+        bonus += 500;
+
     return bonus * (1 + pos.must_capture());
   }
 
