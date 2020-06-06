@@ -221,11 +221,11 @@ Entry* probe(const Position& pos) {
   // Zero or just one pawn makes it difficult to win, even with a small material
   // advantage. This catches some trivial draws like KK, KBK and KNK and gives a
   // drawish scale factor for cases such as KRKBP and KmmKm (except for KBBKN).
-  if (!pos.count<PAWN>(WHITE) && npm_w - npm_b <= BishopValueMg)
+  if (!pos.count<PAWN>(WHITE) && npm_w - npm_b <= BishopValueMg / (1 + bool(pos.pieces(FERS, SILVER))))
       e->factor[WHITE] = uint8_t(npm_w <  RookValueMg   ? SCALE_FACTOR_DRAW :
                                  npm_b <= BishopValueMg ? 4 : 14);
 
-  if (!pos.count<PAWN>(BLACK) && npm_b - npm_w <= BishopValueMg)
+  if (!pos.count<PAWN>(BLACK) && npm_b - npm_w <= BishopValueMg / (1 + bool(pos.pieces(FERS, SILVER))))
       e->factor[BLACK] = uint8_t(npm_b <  RookValueMg   ? SCALE_FACTOR_DRAW :
                                  npm_w <= BishopValueMg ? 4 : 14);
   }
