@@ -958,7 +958,8 @@ namespace {
     {
         int remainingChecks = pos.checks_remaining(Us);
         assert(remainingChecks > 0);
-        score += make_score(3600, 1000) / (remainingChecks * remainingChecks);
+        Value npm = pos.non_pawn_material(Us);
+        score += make_score(2000 + npm / 4, 500 + npm / 4) / (remainingChecks * remainingChecks);
     }
 
     // Extinction
