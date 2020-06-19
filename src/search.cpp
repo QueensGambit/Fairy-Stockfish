@@ -899,7 +899,7 @@ namespace {
               || (ss-4)->staticEval == VALUE_NONE) : ss->staticEval > (ss-2)->staticEval;
 
     // Skip early pruning in case of mandatory capture
-    if (pos.must_capture() && MoveList<CAPTURES>(pos).size())
+    if ((pos.must_capture() && MoveList<CAPTURES>(pos).size()) || (pos.check_counting() && pos.checks_remaining(~us) == 1))
         goto moves_loop;
 
     // Step 8. Futility pruning: child node (~50 Elo)
