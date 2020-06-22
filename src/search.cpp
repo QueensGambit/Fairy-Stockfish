@@ -908,7 +908,7 @@ namespace {
         && !(   pos.extinction_value() == -VALUE_MATE
              && pos.extinction_piece_types().find(ALL_PIECES) == pos.extinction_piece_types().end())
         && !(pos.capture_the_flag_piece() && !pos.checking_permitted())
-        &&  eval - futility_margin(depth, improving) * (1 + pos.check_counting() + 2 * pos.must_capture()) >= beta
+        &&  eval - futility_margin(depth, improving) * (4 - pos.captures_to_hand() + 4 * pos.check_counting() + 8 * pos.must_capture()) / 4 >= beta
         &&  eval < VALUE_KNOWN_WIN) // Do not return unproven wins
         return eval;
 
