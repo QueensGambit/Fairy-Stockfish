@@ -1691,6 +1691,9 @@ bool Position::see_ge(Move m, Value threshold) const {
   if (check_counting() && color_of(moved_piece(m)) == sideToMove && gives_check(m))
       return true;
 
+  if (captures_to_hand() && color_of(moved_piece(m)) == sideToMove && piece_on(to) && gives_check(m))
+      return true;
+
   // Extinction
   if (   extinction_value() != VALUE_NONE
       && piece_on(to)
