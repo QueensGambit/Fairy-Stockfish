@@ -828,8 +828,8 @@ namespace {
     Value maxMg = VALUE_ZERO, maxEg = VALUE_ZERO;
     for (PieceType pt : pos.promotion_piece_types())
     {
-        maxMg = std::max(maxMg, PieceValue[MG][pt]);
-        maxEg = std::max(maxEg, PieceValue[EG][pt]);
+        maxMg = std::max(maxMg, PieceValue[MG][pt] / (1 + pos.captures_to_hand()));
+        maxEg = std::max(maxEg, PieceValue[EG][pt] / (1 + pos.captures_to_hand()));
     }
     score = make_score(mg_value(score) * int(maxMg - PawnValueMg) / (QueenValueMg - PawnValueMg),
                        eg_value(score) * int(maxEg - PawnValueEg) / (QueenValueEg - PawnValueEg));
