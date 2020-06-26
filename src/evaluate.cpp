@@ -777,7 +777,7 @@ namespace {
             Square blockSq = s + Up;
 
             // Skip bonus for antichess variants
-            if (pos.extinction_value() != VALUE_MATE)
+            if (pos.extinction_value() != VALUE_MATE && !pos.captures_to_hand())
             {
                 // Adjust bonus based on the king's proximity
                 bonus += make_score(0, (  (king_proximity(Them, blockSq) * 19) / 4
